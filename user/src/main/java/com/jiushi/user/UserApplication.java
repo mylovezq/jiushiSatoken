@@ -15,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @MapperScan(basePackages = "com.jiushi.user.dao")
 @ComponentScan(basePackages = {"com.jiushi"})
+@MapperScan(basePackages = {"com.jiushi.*.dao"})
 @EnableFeignClients
 public class UserApplication {
     public static void main(String[] args) {
