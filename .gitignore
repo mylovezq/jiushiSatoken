@@ -1,0 +1,11 @@
+# Project exclude paths
+/auth/target/
+/common/target/
+/gateway/target/
+/.idea/
+/**/*.iml
+
+# Project exclude paths
+/commons/target/
+/commons-api/target/
+/user/target/

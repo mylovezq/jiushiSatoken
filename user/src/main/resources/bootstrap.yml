@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: user
+  profiles:
+    active: @profileActive@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.136.137:8848
+        group: @profileActive@
+        namespace: @profileActive@
+      config:
+        server-addr: 192.168.136.137:8848
+        file-extension: yaml
+        group: @profileActive@
+        namespace: @profileActive@
+        # ???????
+        extension-configs:
+          - data-id: public-config.yaml
+            refresh: true
+            group: @profileActive@
