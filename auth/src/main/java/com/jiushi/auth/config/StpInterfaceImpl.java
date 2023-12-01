@@ -1,4 +1,4 @@
-package com.jiushi.core.common.config;
+package com.jiushi.auth.config;
 
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;

@@ -72,6 +72,7 @@
         <sa-token-spring-boot-starter>1.37.0</sa-token-spring-boot-starter>
         <sa-token-redis-jackson>1.37.0</sa-token-redis-jackson>
         <sa-token-reactor-spring-boot-starter>1.37.0</sa-token-reactor-spring-boot-starter>
+        <sa-token-oauth2>1.37.0</sa-token-oauth2>
         <sa-token-jwt>1.37.0</sa-token-jwt>
         <lombok>1.18.24</lombok>
     </properties>
@@ -177,7 +178,12 @@
                 <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${sa-token-spring-boot-starter}</version>
             </dependency>
-
+            <!-- Sa-Token-OAuth2.0 模块 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-oauth2</artifactId>
+                <version>${sa-token-oauth2}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
@@ -195,7 +201,12 @@
                 <artifactId>sa-token-redis-jackson</artifactId>
                 <version>${sa-token-redis-jackson}</version>
             </dependency>
-
+            <!--redisson-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>

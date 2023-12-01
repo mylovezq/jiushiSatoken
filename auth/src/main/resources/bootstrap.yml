@@ -14,7 +14,6 @@ spring:
         file-extension: yaml
         group: @profileActive@
         namespace: @profileActive@
-        # ???????
         extension-configs:
           - data-id: public-config.yaml
             refresh: true
