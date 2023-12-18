@@ -1,4 +1,4 @@
-package com.jiushi.core.common.config.utils;
+package com.jiushi.core.common.config.utils.redis;
 
 import cn.hutool.extra.spring.SpringUtil;
 import lombok.AccessLevel;

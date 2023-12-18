@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableFeignClients(basePackages = {"com.jiushi.*.api"})
 @ComponentScan(basePackages = {"com.jiushi"})
-@MapperScan(basePackages = {"com.jiushi.*.dao"})
+@MapperScan(basePackages = {"com.jiushi.**.dao"})
 public class AuthApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuthApplication.class,args);

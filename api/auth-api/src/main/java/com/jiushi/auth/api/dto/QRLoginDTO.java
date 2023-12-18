@@ -20,7 +20,7 @@ public class QRLoginDTO {
 
 
     //登录的用户id
-    private String clientUserNo ;
+    private Long userId ;
     //状态
     private QRLoginStatusEnum qrLoginStatus;
 }
