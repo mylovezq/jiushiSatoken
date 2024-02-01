@@ -5,17 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.jiushi</groupId>
-        <artifactId>jiushi-satoken</artifactId>
+        <artifactId>api</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <groupId>com.jiushi</groupId>
 
-    <artifactId>api</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>auth-api</module>
-        <module>user-api</module>
-        <module>pay-api</module>
-    </modules>
+    <artifactId>pay-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -24,16 +20,8 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
     </dependencies>
 

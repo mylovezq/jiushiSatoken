@@ -1,28 +1,22 @@
-package com.jiushi.user.controller;
+package com.jiushi.pay.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONUtil;
 import com.jiushi.core.common.config.rocketMq.RocketmqSendCallback;
 import com.jiushi.pay.api.dto.PayInfoDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-/**
- * @author my deng
- * @since 2022/11/3 17:56
- */
-@RestController
-@RequestMapping("/user")
-public class UserController {
-
+@Slf4j
+@Component
+public class JiushiRocketmqProducer {
     @Resource
     private RocketMQTemplate rocketMQTemplate;
 
 
-    @GetMapping(value = "/sendPayMessage")
-    public void r1() {
+    public void send() {
 
         PayInfoDTO payInfoDTO = new PayInfoDTO();
         payInfoDTO.setId(10000L);
@@ -30,9 +24,7 @@ public class UserController {
         payInfoDTO.setPayUserId("99999");
 
         //发送订单变更mq消息
-        rocketMQTemplate.asyncSend("jiushiPayTopic:jiuTag", JSONUtil.toJsonStr(payInfoDTO), new RocketmqSendCallback());
+        rocketMQTemplate.asyncSend("jiushiPayTopic:jiushiTag", JSONUtil.toJsonStr(payInfoDTO), new RocketmqSendCallback());
 
     }
-
 }
-
