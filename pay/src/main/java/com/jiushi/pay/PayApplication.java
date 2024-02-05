@@ -1,4 +1,4 @@
-package com.jiushi.user;
+package com.jiushi.pay;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan(basePackages = "com.jiushi.user.dao")
-@ComponentScan(basePackages = {"com.jiushi"})
+@MapperScan(basePackages = "com.jiushi")
+@ComponentScan(basePackages = {"com.jiushi.pay"})
 @MapperScan(basePackages = {"com.jiushi.*.dao"})
 @EnableFeignClients
 public class PayApplication {

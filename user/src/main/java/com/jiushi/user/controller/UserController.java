@@ -28,9 +28,8 @@ public class UserController {
         payInfoDTO.setId(10000L);
         payInfoDTO.setPayType("test");
         payInfoDTO.setPayUserId("99999");
-
         //发送订单变更mq消息
-        rocketMQTemplate.asyncSend("jiushiPayTopic:jiuTag", JSONUtil.toJsonStr(payInfoDTO), new RocketmqSendCallback());
+        rocketMQTemplate.asyncSend("jiushiPayTopic:jiushiTag", JSONUtil.toJsonStr(payInfoDTO), new RocketmqSendCallback());
 
     }
 
