@@ -1,7 +1,7 @@
 package com.jiushi.pay.controller;
 
 import cn.hutool.json.JSONUtil;
-import com.jiushi.core.common.config.rocketMq.RocketmqSendCallback;
+import com.jiushi.pay.rocketMq.RocketmqSendCallback;
 import com.jiushi.pay.api.dto.PayInfoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;

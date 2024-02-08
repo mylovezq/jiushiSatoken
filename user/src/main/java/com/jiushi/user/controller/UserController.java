@@ -1,9 +1,10 @@
 package com.jiushi.user.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONUtil;
-import com.jiushi.core.common.config.rocketMq.RocketmqSendCallback;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.jiushi.pay.api.dto.PayInfoDTO;
+import com.jiushi.user.rocketMq.RocketmqSendCallback;
+import fegin.PayMsgFeignClient;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,19 @@ public class UserController {
 
     @Resource
     private RocketMQTemplate rocketMQTemplate;
+    @Resource
+    private PayMsgFeignClient payMsgFeignClient;
 
 
     @GetMapping(value = "/sendPayMessage")
     public void r1() {
 
         PayInfoDTO payInfoDTO = new PayInfoDTO();
-        payInfoDTO.setId(10000L);
+        payInfoDTO.setId(IdWorker.getId());
         payInfoDTO.setPayType("test");
         payInfoDTO.setPayUserId("99999");
         //发送订单变更mq消息
-        rocketMQTemplate.asyncSend("jiushiPayTopic:jiushiTag", JSONUtil.toJsonStr(payInfoDTO), new RocketmqSendCallback());
+        rocketMQTemplate.asyncSend("jiushiPayTopic:jiushiTag", payInfoDTO, new RocketmqSendCallback(payMsgFeignClient,payInfoDTO));
 
     }
 

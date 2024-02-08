@@ -25,9 +25,8 @@ public class PayController {
 
     @GetMapping("/currentUser")
     public Object currentUser() {
-        Object loginId = StpUtil.getTokenInfo().getLoginId();
 
-        return loginId;
+        return StpUtil.getTokenInfo().getLoginId();
     }
 
 }
