@@ -17,4 +17,5 @@ public class PayMsgDTO {
 
     private String status;
 
+    private String errMsg;
 }

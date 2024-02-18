@@ -8,4 +8,6 @@
 # Project exclude paths
 /commons/target/
 /commons-api/target/
-/user/target/
+/**/target/
+/api/auth-api/target/
+/**/**/target/

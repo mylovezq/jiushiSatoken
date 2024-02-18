@@ -28,6 +28,9 @@ public class MyFeignRequestInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         // 从header获取X-token
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (Objects.isNull(requestAttributes)) {
+            return;
+        }
         ServletRequestAttributes attr = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest request = attr.getRequest();
         String token = request.getHeader("Authorization");//网关传过来的 token

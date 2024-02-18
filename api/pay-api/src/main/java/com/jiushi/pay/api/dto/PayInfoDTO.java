@@ -13,10 +13,10 @@ public class PayInfoDTO {
 
     private Long id;
 
-    private String payId;
-
     private String payType;
 
     private String payUserId;
+
+    private String payStatus;
 
 }

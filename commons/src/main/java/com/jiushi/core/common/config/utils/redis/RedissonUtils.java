@@ -416,5 +416,4 @@ public class RedissonUtils {
 		RKeys rKeys = CLIENT.getKeys();
 		return rKeys.countExists(getNameMapper().map(key)) > 0;
 	}
-
 }

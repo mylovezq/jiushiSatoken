@@ -1,10 +1,11 @@
 package com.jiushi.user.controller;
 
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.jiushi.pay.api.dto.PayInfoDTO;
-import com.jiushi.user.rocketMq.RocketmqSendCallback;
-import fegin.PayMsgFeignClient;
+
+import com.jiushi.core.common.config.rocketMq.PayRocketmqSendCallback;
+
+import com.jiushi.pay.api.fegin.PayMsgFeignClient;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,9 @@ public class UserController {
         payInfoDTO.setId(IdWorker.getId());
         payInfoDTO.setPayType("test");
         payInfoDTO.setPayUserId("99999");
+        payInfoDTO.setPayStatus("已支付");
         //发送订单变更mq消息
-        rocketMQTemplate.asyncSend("jiushiPayTopic:jiushiTag", payInfoDTO, new RocketmqSendCallback(payMsgFeignClient,payInfoDTO));
+        rocketMQTemplate.asyncSend("jiushiPayTopic:jiushiTag", payInfoDTO, new PayRocketmqSendCallback(payMsgFeignClient,payInfoDTO));
 
     }
 
