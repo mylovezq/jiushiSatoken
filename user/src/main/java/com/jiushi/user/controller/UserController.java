@@ -1,5 +1,6 @@
 package com.jiushi.user.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.jiushi.pay.api.dto.PayInfoDTO;
 
@@ -10,6 +11,7 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author my deng
