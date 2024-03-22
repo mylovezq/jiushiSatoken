@@ -4,6 +4,7 @@ import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * [Sa-Token 权限认证] 全局配置类 
  */
 @Configuration
+@Slf4j
 @EnableConfigurationProperties({AuthProperties.class})
 public class SaTokenConfigure {
     /**
@@ -28,12 +30,12 @@ public class SaTokenConfigure {
                 .addExclude(authProperties.getSkipUrl().toArray(new String[]{}))
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
-                    System.out.println("---------- sa全局认证");
+                   log.error("sa全局token拦截开始" + obj);
                     SaRouter.match("/**", () -> StpUtil.checkLogin());
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数 
                 .setError(e -> {
-                    System.out.println("---------- sa全局异常 ");
+                   log.error("sa拦截异常",e);
                     return SaResult.error(e.getMessage());
                 })
                 ;

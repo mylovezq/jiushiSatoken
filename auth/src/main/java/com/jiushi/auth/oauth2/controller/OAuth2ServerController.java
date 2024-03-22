@@ -11,7 +11,8 @@ import cn.dev33.satoken.util.SaResult;
 import com.jiushi.auth.api.constant.QRLoginStatusEnum;
 import com.jiushi.auth.api.dto.QRLoginDTO;
 import com.jiushi.auth.api.vo.QRLoginVO;
-import com.jiushi.core.common.config.utils.redis.RedissonUtils;
+
+import com.jiushi.core.common.utils.redis.RedissonUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

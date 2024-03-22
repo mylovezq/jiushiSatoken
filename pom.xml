@@ -14,6 +14,7 @@
         <module>auth</module>
         <module>commons</module>
         <module>user</module>
+        <module>order</module>
         <module>gateway</module>
         <module>api</module>
     </modules>
@@ -40,7 +41,7 @@
         <swagger.version>1.6.5</swagger.version>
         <jetbrains-annotations.version>23.0.0</jetbrains-annotations.version>
         <jackson-datatype-jsr310.version>2.10.5</jackson-datatype-jsr310.version>
-        <fastjson.version>1.2.79</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <transmittable-thread-local.version>2.12.4</transmittable-thread-local.version>
         <jackson-core-asl.version>1.9.13</jackson-core-asl.version>
         <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
@@ -224,7 +225,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profileActive>satoken-dev</profileActive>
+                <profileActive>jiushiSeckill</profileActive>
             </properties>
         </profile>
     </profiles>
@@ -235,6 +236,24 @@
                 <!--解决找不到@profile.name@-->
                 <filtering>true</filtering>
             </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <!-- 指定只包含特定类型的文件，例如这里包含所有的XML文件 -->
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
         </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
 </project>

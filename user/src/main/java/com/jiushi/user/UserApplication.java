@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan(basePackages = {"com.jiushi.**.dao"})
+@MapperScan(basePackages = {"com.jiushi.**.mapper"})
 @EnableFeignClients(basePackages = "com.jiushi.*.api.fegin")
 @ComponentScan(basePackages = {"com.jiushi.core","com.jiushi.user"})
 public class UserApplication {

@@ -14,9 +14,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthUserController {
     @Autowired
     private UserInfoFeign userInfoFeign;
-    @GetMapping("myUser")
-    public SaResult myUser(){
-        System.out.println(userInfoFeign.currentUser());
-        return SaResult.data(StpUtil.getTokenValue());
-    }
+
 }

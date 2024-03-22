@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: order
+  profiles:
+    active: @profileActive@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.20:8848
+        group: @profileActive@
+        namespace: @profileActive@
+      config:
+        server-addr: 192.168.1.20:8848
+        file-extension: yaml
+        group: @profileActive@
+        namespace: @profileActive@
+
+        extension-configs:
+          - data-id: public-config.yaml
+            refresh: true
+            group: @profileActive@
+          - data-id: redis-config-dev.yaml
+            refresh: true
+            group: @profileActive@
+mybatis:
+  configuration:
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+    map-underscore-to-camel-case: true
+  mapperLocations: classpath:com/jiushi/order/mapper/*Mapper.xml

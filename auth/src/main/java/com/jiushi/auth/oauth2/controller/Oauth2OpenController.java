@@ -12,7 +12,8 @@ import com.jiushi.auth.api.dto.QRLoginDTO;
 import com.jiushi.auth.api.qo.QO.QRLoginQO;
 import com.jiushi.auth.api.vo.QRCodeVO;
 import com.jiushi.auth.oauth2.service.impl.SaOAuth2TemplateImpl;
-import com.jiushi.core.common.config.utils.redis.RedissonUtils;
+
+import com.jiushi.core.common.utils.redis.RedissonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;

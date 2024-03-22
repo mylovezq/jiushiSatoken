@@ -9,7 +9,7 @@ import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.StrUtil;
 import com.jiushi.auth.api.vo.SaTokenUserBaseVO;
 import com.jiushi.auth.oauth2.service.impl.SaOAuth2TemplateImpl;
-import com.jiushi.core.common.config.utils.redis.RedissonUtils;
+import com.jiushi.core.common.utils.redis.RedissonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

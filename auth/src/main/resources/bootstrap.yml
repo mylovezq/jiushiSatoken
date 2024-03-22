@@ -18,3 +18,6 @@ spring:
           - data-id: public-config.yaml
             refresh: true
             group: @profileActive@
+          - data-id: redis-config-dev.yaml
+            refresh: true
+            group: @profileActive@

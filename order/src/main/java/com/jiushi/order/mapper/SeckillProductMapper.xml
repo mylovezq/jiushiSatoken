@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiushi.order.mapper.SeckillProductMapper">
+
+    <select id="selectTodayListByTime" resultType="com.jiushi.order.api.vo.SeckillProductVo">
+        SELECT
+        sp.id AS id,
+        sp.product_id AS productId,
+        sp.seckill_price AS seckillPrice,
+        sp.intergral AS integral,
+        sp.stock_count AS stockCount,
+        sp.start_date AS startDate,
+        sp.time AS time,
+        p.id AS productId,
+        p.product_name AS productName,
+        p.product_title AS productTitle,
+        p.product_img AS productImg,
+        p.product_detail AS productDetail,
+        p.product_price AS productPrice
+        FROM
+        seckill_product sp
+        LEFT JOIN
+        product p ON sp.product_id = p.id
+        where to_days(start_date) = to_days(now())
+        and time = #{time};
+    </select>
+    <select id="selectBySeckillId" resultType="com.jiushi.order.api.vo.SeckillProductVo">
+        SELECT
+        sp.id AS id,
+        sp.product_id AS productId,
+        sp.seckill_price AS seckillPrice,
+        sp.intergral AS integral,
+        sp.stock_count AS stockCount,
+        sp.start_date AS startDate,
+        sp.time AS time,
+        p.id AS productId,
+        p.product_name AS productName,
+        p.product_title AS productTitle,
+        p.product_img AS productImg,
+        p.product_detail AS productDetail,
+        p.product_price AS productPrice
+        FROM
+        seckill_product sp
+        LEFT JOIN
+        product p ON sp.product_id = p.id
+        where sp.id = #{seckillId}
+
+    </select>
+</mapper>
