@@ -21,7 +21,7 @@
         seckill_product sp
         LEFT JOIN
         product p ON sp.product_id = p.id
-        where to_days(start_date) = to_days(now())
+        where start_date = date_format(now(), '%Y-%m-%d')
         and time = #{time};
     </select>
     <select id="selectBySeckillId" resultType="com.jiushi.order.api.vo.SeckillProductVo">

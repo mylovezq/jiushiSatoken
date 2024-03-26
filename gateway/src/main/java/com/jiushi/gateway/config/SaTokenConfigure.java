@@ -30,14 +30,13 @@ public class SaTokenConfigure {
                 .addExclude(authProperties.getSkipUrl().toArray(new String[]{}))
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
-                   log.error("sa全局token拦截开始" + obj);
+                   log.info("sa全局token拦截开始" + obj);
                     SaRouter.match("/**", () -> StpUtil.checkLogin());
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数 
                 .setError(e -> {
                    log.error("sa拦截异常",e);
                     return SaResult.error(e.getMessage());
-                })
-                ;
+                });
     }
 }

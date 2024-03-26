@@ -21,4 +21,6 @@ public interface ISeckillProductService extends IService<SeckillProduct> {
     List<SeckillProductVo> selectTodayListByTimeFromRedis(Integer time);
 
     SeckillProductVo selectBySeckillId(Long seckillId);
+
+    void updateStock(Integer time);
 }
