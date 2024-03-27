@@ -1,10 +1,10 @@
 package com.jiushi.order.controller;
 
 
-import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.jiushi.core.common.api.BusinessException;
 import com.jiushi.core.common.api.ResultVO;
-import com.jiushi.order.api.vo.SeckillProductVo;
+import com.jiushi.order.lua.config.ScriptConfig;
 import com.jiushi.order.service.ISeckillProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -13,14 +13,11 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -44,28 +41,8 @@ public class OrderInfoController {
     @Autowired
     private ISeckillProductService seckillProductService;
 
-    private String decreaseLuaStr
-        =  "local productJson = redis.call('GET', KEYS[1])\n" +
-            "if not productJson then\n" +
-            "return '商品已被秒杀完'\n" +
-            "end\n" +
-
-            "local product = cjson.decode(productJson)\n" +
-            "local userLimitBuyOldCount = redis.call('GET', KEYS[2])\n" +
-            "local userLimitBuyRealCount = (userLimitBuyOldCount == nil) and 0 or (tonumber(userLimitBuyOldCount) or 0)\n" +
-
-            "if product and product.stockCount and product.stockCount < tonumber(ARGV[1]) then \n" +
-            "return '商品已被秒杀完'\n" +
-            "end\n"+
-
-            "if userLimitBuyRealCount + tonumber(ARGV[1]) > tonumber(product.limitBuy) then\n" +
-            "return '你的账号限购'..tostring(product.limitBuy)\n" +
-            "end\n"+
-
-            "    product.stockCount = product.stockCount - tonumber(ARGV[1])\n" +
-            "    redis.call('SET', KEYS[2], userLimitBuyRealCount + tonumber(ARGV[1]))\n"+
-            "    redis.call('SET', KEYS[1], cjson.encode(product))\n" +
-            "    return 'success'\n";
+    @Resource
+   private ScriptConfig scriptConfig;
 
     /**
      * 优化前：
@@ -78,8 +55,8 @@ public class OrderInfoController {
     @GetMapping("/doSeckill")
     public ResultVO<String> doSeckill(Long seckillId) {
         String productKey = "jiushiSeckil:today:seckillId:"+seckillId;
-        String productUserKey = "jiushiSeckil:today:seckillId:userId:"+seckillId +":"+ StpUtil.getLoginId();
-        RedisScript<String> decreaseStockScript = new DefaultRedisScript<>(decreaseLuaStr, String.class);
+        String productUserKey = "jiushiSeckil:today:seckillId:userId:"+seckillId +":"+ RandomUtil.randomInt(1, 100);;
+        RedisScript<String> decreaseStockScript = new DefaultRedisScript<>(scriptConfig.getLuaScriptContent(), String.class);
         // 秒杀id获取到秒杀商品对象
 
         // 执行Lua脚本，假设productId作为Key
