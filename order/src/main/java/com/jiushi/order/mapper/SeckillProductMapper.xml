@@ -29,7 +29,7 @@
         sp.id AS id,
         sp.product_id AS productId,
         sp.seckill_price AS seckillPrice,
-        sp.intergral AS integral,
+        sp.limit_buy AS limitBuy,
         sp.stock_count AS stockCount,
         sp.start_date AS startDate,
         sp.time AS time,

@@ -7,6 +7,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.CacheKeyPrefix;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
@@ -15,6 +16,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.util.Assert;
 
 import java.time.Duration;
 
@@ -31,8 +33,9 @@ public class CacheConfig {
         //缓存配置对象
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
 
-        redisCacheConfiguration = redisCacheConfiguration.entryTtl(Duration.ofDays(1L)) //设置缓存的默认超时时间：30分钟
-                .disableCachingNullValues()             //如果是空值，不缓存
+        redisCacheConfiguration = redisCacheConfiguration.entryTtl(Duration.ofDays(2L))//设置缓存的默认超时时间：1天
+                .computePrefixWith(name-> name +":")
+                .disableCachingNullValues()//如果是空值，不缓存
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))         //设置key序列化器
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer((valueSerializer())));  //设置value序列化器
 
@@ -40,6 +43,8 @@ public class CacheConfig {
                 .builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration).build();
     }
+
+
 
     private RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();

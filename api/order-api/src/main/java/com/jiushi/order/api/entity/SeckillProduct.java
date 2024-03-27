@@ -38,11 +38,11 @@ public class SeckillProduct {
     @TableField("seckill_price")
     private BigDecimal seckillPrice;
 
-    @TableField("intergral")
-    private BigDecimal intergral;
-
     @TableField("stock_count")
     private Integer stockCount;
+
+    @TableField("limit_buy")
+    private Integer limitBuy;
 
     @TableField("start_date")
     private LocalDate startDate;
