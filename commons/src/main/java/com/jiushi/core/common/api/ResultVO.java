@@ -39,6 +39,12 @@ public class ResultVO<T> implements Serializable {
     public static <T> ResultVO<T> defaultError(){
         return new ResultVO<>(ERROR_CODE, ERROR_MESSAGE,null);
     }
+    public static <T> ResultVO<T> failBiz(String errMsg, T data){
+        return new ResultVO<>(500, errMsg,data);
+    }
+    public static <T> ResultVO<T> failBiz(String errMsg){
+        return new ResultVO<>(500, errMsg,null);
+    }
 
     public boolean hasError(){
         // 状态码 !=200 说明有错误.

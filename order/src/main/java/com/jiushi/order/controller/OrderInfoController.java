@@ -4,6 +4,7 @@ package com.jiushi.order.controller;
 import cn.hutool.core.util.RandomUtil;
 import com.jiushi.core.common.api.BusinessException;
 import com.jiushi.core.common.api.ResultVO;
+import com.jiushi.order.api.qo.DoSeckillQO;
 import com.jiushi.order.lua.config.RedisLuaScriptConfig;
 import com.jiushi.order.service.ISeckillProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -33,12 +33,8 @@ import java.util.Objects;
 @RequestMapping("/orderInfo")
 public class OrderInfoController {
 
-
-
     @Autowired
     private ISeckillProductService seckillProductService;
-
-
 
     /**
      * 优化前：
@@ -48,10 +44,9 @@ public class OrderInfoController {
      * 测试数据：500 个用户，100 线程，执行 50 次
      * 测试情况：850 QPS
      */
-    @GetMapping("/doSeckill")
-    public ResultVO<String> doSeckill(Long seckillId) {
-        seckillProductService.doSeckill(seckillId);
-
+    @PostMapping("/doSeckill")
+    public ResultVO<String> doSeckill(@RequestBody @Validated DoSeckillQO doSeckillQO) {
+        seckillProductService.doSeckill(doSeckillQO.getId());
 
 //        // 6. 执行下单操作(减少库存, 创建订单)
 //        // 修改为利用 RocketMQ 发送消息，实现异步下单

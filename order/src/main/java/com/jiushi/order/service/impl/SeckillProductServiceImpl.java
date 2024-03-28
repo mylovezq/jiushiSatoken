@@ -13,6 +13,7 @@ import com.jiushi.order.service.ISeckillProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -41,14 +42,12 @@ import java.util.Objects;
 @Slf4j
 @CacheConfig(cacheNames = {"jiushiSeckil"})
 public class SeckillProductServiceImpl extends ServiceImpl<SeckillProductMapper, SeckillProduct> implements ISeckillProductService {
-    @Resource
+    @Autowired
     private StringRedisTemplate redisTemplate;
     @Resource
     private RocketMQTemplate rocketMQTemplate;
     @Resource
     private RedisLuaScriptConfig scriptConfig;
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
     @Override
     @Cacheable(key = "'today:products:'+#time")
     public List<SeckillProductVo> selectTodayListByTimeFromRedis(Integer time) {

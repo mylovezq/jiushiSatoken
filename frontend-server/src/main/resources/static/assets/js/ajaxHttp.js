@@ -3,13 +3,14 @@ function ajaxHttp (obj, callback, err) {
     $.ajax(window.location.origin+":9999"+obj.url, {
         type: obj.type || 'get',
         contentType: obj.contentType || 'application/json;charset=UTF-8',
-        headers:{'token': localStorage.getItem('token')},
+        headers:{'Authorization': 'Bearer '+ localStorage.getItem('token')},
         data: obj.data || {},
         success: function (res) {
             if (res.code === 200) {
                 callback(res)
             } else {
-                if (res.code === -2 || res.code === -3) {
+                console.log(res)
+                if (res.code === -2 || res.code === -3 || res.code === 500) {
                     localStorage.removeItem('token')
                     $('.commodity-header').find('.seckill-shopping').css('display', 'block')
                     setTimeout(function () {
