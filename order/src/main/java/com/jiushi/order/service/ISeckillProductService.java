@@ -25,4 +25,5 @@ public interface ISeckillProductService extends IService<SeckillProduct> {
     void deleteBySeckillId(Long seckillId);
 
 
+    String doSeckill(Long seckillId);
 }
